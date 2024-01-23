@@ -9,8 +9,7 @@
                 </svg>
             </button>
 
-            <Card v-for="(item, index) in visibleItems" :key="index" :image="item.image" :title="item.title"
-                :description="item.description" />
+            <Card v-for="(item, index) in visibleItems" :key="index" :image="item.image" :title="item.title" />
 
             <button @click="nextPage" class="carousel-button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"

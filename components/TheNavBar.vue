@@ -8,6 +8,9 @@
                             <Dropdown :mainLabel="dropdown.mainLabel" :dropdownItems="dropdown.dropdownItems" />
                         </li>
                     </div>
+
+                    <!-- Shopping cart element -->
+
                 </ul>
             </div>
         </nav>

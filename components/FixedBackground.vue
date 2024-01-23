@@ -1,33 +1,70 @@
+<!-- parallax image with text on it -->
 <template>
-  <div :class="bgimage" >
-        <h2 class="text-5xl text-white mt-10">{{ title }}</h2>
-  </div>
+    <div class="fixed-background" :style="{ backgroundImage: 'url(' + bgimage + ')' }">
+        <div class="fixed-background__overlay">
+            <div class="fixed-background__overlay__text">
+                <h1>{{ title }}</h1>
+                <p>{{ description }}</p>
+            </div>
+        </div>
+    </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
     name: 'FixedBackground',
-    props: [
-        'bgimage',
-        'title'
-    ]
-}
+    props: {
+        bgimage: {
+            type: String,
+            required: true,
+        },
+        title: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: false,
+        },
+    },
+})
 </script>
 
-<style>
-.laptop{
+<style scoped>
+.fixed-background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    min-height: 600px;
-    background-image: url("/assets/PBP-placeholder.jpeg");
+    background-color: #000;
+    filter: contrast(0.8);
 }
-.phone{
-    background-attachment: fixed;
-    min-height: 600px;
-    background-image: url("/assets/pinephone-placeholder.jpeg");
+
+.fixed-background__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
 }
-.tab{
-    background-attachment: fixed;
-    min-height: 600px;
-    background-image: url("/assets/PineTabPlaceholder.jpeg");
+
+.fixed-background__overlay__text {
+    position: relative;
+    top: 10%;
+    left: 3%;
+    color: #fff;
+    text-align: left;
+}
+
+.fixed-background__overlay__text h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    margin: 0;
 }
 </style>
