@@ -1,4 +1,3 @@
-<!-- parallax image with text on it -->
 <template>
     <div class="fixed-background" :style="{ backgroundImage: 'url(' + bgimage + ')' }">
         <div class="fixed-background__overlay">
@@ -54,7 +53,7 @@ export default defineComponent({
 
 .fixed-background__overlay__text {
     position: relative;
-    top: 10%;
+    top: 15%;
     left: 3%;
     color: #fff;
     text-align: left;

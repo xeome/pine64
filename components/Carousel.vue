@@ -18,7 +18,6 @@
                 </svg>
             </button>
 
-
         </div>
         <div class="carousel-dots">
             <span v-for="itemIndex in items.length - 4" :key="itemIndex" :class="{ active: itemIndex === currentItem + 1 }"
@@ -27,9 +26,9 @@
     </div>
 </template>
 
-
 <script lang="ts">
 import Card from './Card.vue';
+import { useDataStore } from '@/stores/data'
 
 interface CarouselItem {
     image: string;
@@ -37,59 +36,17 @@ interface CarouselItem {
     url: string;
 }
 
-
 export default defineComponent({
     name: 'Carousel',
     components: {
         Card,
     },
     data(): { currentItem: Ref<number>; itemsPerPage: number; items: CarouselItem[] } {
-
+        const data = useDataStore();
         return {
             currentItem: ref(0),
-            itemsPerPage: 5,
-            items: [
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 1',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                },
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 2',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                },
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 3',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                },
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 4',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                },
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 5',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                },
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 6',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                },
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 7',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                },
-                {
-                    image: '/assets/emmcModule.png',
-                    title: 'Card 8',
-                    url: 'https://pine64.com/product-category/pinebook-pro-accessories/'
-                }
-            ],
+            itemsPerPage: data.itemsPerPage,
+            items: data.items
         };
     },
     computed: {
@@ -109,8 +66,8 @@ export default defineComponent({
             this.goToPage(this.currentItem - 1);
         },
         goToPage(page: number): void {
-            const lastItem = this.items.length - 1;
-            this.currentItem = Math.min(Math.max(page, 0), lastItem - 4);
+            const length = this.items.length;
+            this.currentItem = (page + length) % (length - 4);;
         },
     },
 });
@@ -127,6 +84,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 24px;
 }
 
 .carousel-button {

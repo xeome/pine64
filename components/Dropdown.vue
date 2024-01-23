@@ -13,7 +13,8 @@
             class="bg-gray-300 border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
             <li v-for="item in dropdownItems" :key="item.name"
                 class="rounded-sm relative px-3 py-1 hover:bg-gray-100 text-black">
-                <button class="w-full text-left flex items-center outline-none focus:outline-none">
+                <NuxtLink :to="`product-category/${item.name}`"
+                    class="w-full text-left flex items-center outline-none focus:outline-none">
                     <span class="pr-1 flex-1"> {{ item.name }} </span>
                     <span class="mr-auto" v-if="item.submenu && item.submenu.length">
                         <svg class="fill-current h-4 w-4 transition duration-150 ease-in-out"
@@ -21,11 +22,13 @@
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
                     </span>
-                </button>
+                </NuxtLink>
                 <ul v-if="item.submenu && item.submenu.length"
                     class="bg-gray-300 border rounded-sm absolute top-0 right-0 transition duration-150 ease-in-out origin-top-left min-w-32">
-                    <li v-for="subitem in item.submenu" :key="subitem" class="px-3 py-1 hover:bg-gray-100"> {{ subitem }}
-                    </li>
+                    <NuxtLink v-for="subitem in item.submenu" :key="subitem" class="px-3 py-1 hover:bg-gray-100 block"
+                        :to="`product-category/${item.name}-${subitem}`">
+                        {{ subitem }}
+                    </NuxtLink>
                 </ul>
             </li>
         </ul>
