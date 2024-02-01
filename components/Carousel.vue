@@ -30,6 +30,11 @@
 import Card from './Card.vue';
 import { useDataStore } from '@/stores/data'
 
+
+let currentItem = ref(0);
+let itemsPerPage = ref(0);
+let items = ref<CarouselItem[]>([]);
+
 interface CarouselItem {
     image: string;
     title: string;
@@ -41,14 +46,24 @@ export default defineComponent({
     components: {
         Card,
     },
-    data(): { currentItem: Ref<number>; itemsPerPage: number; items: CarouselItem[] } {
-        const data = useDataStore();
+
+    setup() {
+        const dataStore = useDataStore();
+        dataStore.fetchItems().then(() => {
+            items.value = dataStore.items;
+            itemsPerPage.value = dataStore.itemsPerPage;
+            console.log(items.value);
+        });
+    },
+
+    data() {
         return {
-            currentItem: ref(0),
-            itemsPerPage: data.itemsPerPage,
-            items: data.items
+            currentItem,
+            itemsPerPage,
+            items,
         };
     },
+
     computed: {
         visibleItems(): CarouselItem[] {
             const startIndex = this.currentItem;
