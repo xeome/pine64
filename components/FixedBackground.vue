@@ -1,13 +1,20 @@
 <template>
     <div class="fixed-background" :style="{ backgroundImage: 'url(' + bgimage + ')' }">
-        <div class="fixed-background__overlay">
-            <div class="fixed-background__overlay__text">
-                <h1>{{ title }}</h1>
+        <div class="fixed-background__overlay ">
+            <div class="fixed-background__overlay__text text-white">
+                <h1 class="text-3xl font-bold uppercase tracking-wider mb-4">{{ title }}</h1>
                 <p>{{ description }}</p>
+            </div>
+            <div
+                class="fixed-background__overlay__button-container flex justify-center items-end absolute bottom-0 left-0 right-0 mb-8">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Buy Now
+                </button>
             </div>
         </div>
     </div>
 </template>
+
 
 <script lang="ts">
 import { defineComponent } from 'vue';

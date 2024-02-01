@@ -1,27 +1,29 @@
 <template>
     <div class="carousel-container">
-        <div class="carousel-wrapper">
+        <h1 class="text-center text-3xl font-bold text-blue mb-8">Popular Accessories</h1>
 
+        <div class="carousel-wrapper w-full flex justify-between">
             <button @click="prevPage" class="carousel-button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    class="h-10 w-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </button>
 
-            <Card v-for="(item, index) in visibleItems" :key="index" :image="item.image" :title="item.title" />
+            <Card v-for="(item, index) in visibleItems" :key="index" :image="item.image" :title="item.title"
+                :url="item.url" />
 
             <button @click="nextPage" class="carousel-button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    class="h-10 w-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
                 </svg>
             </button>
 
         </div>
         <div class="carousel-dots">
-            <span v-for="itemIndex in items.length - 4" :key="itemIndex" :class="{ active: itemIndex === currentItem + 1 }"
-                @click="goToPage(itemIndex - 1)"></span>
+            <span v-for="itemIndex in Math.max(items.length - 4, 0)" :key="itemIndex"
+                :class="{ active: itemIndex === currentItem + 1 }" @click="goToPage(itemIndex - 1)"></span>
         </div>
     </div>
 </template>
@@ -29,7 +31,6 @@
 <script lang="ts">
 import Card from './Card.vue';
 import { useDataStore } from '@/stores/data'
-
 
 let currentItem = ref(0);
 let itemsPerPage = ref(0);
@@ -52,7 +53,6 @@ export default defineComponent({
         dataStore.fetchItems().then(() => {
             items.value = dataStore.items;
             itemsPerPage.value = dataStore.itemsPerPage;
-            console.log(items.value);
         });
     },
 

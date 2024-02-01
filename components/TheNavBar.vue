@@ -138,4 +138,5 @@ a {
 /* Optional: Style for the dropdown items */
 li:hover {
     background-color: #f0f0f0;
-}</style>
+}
+</style>

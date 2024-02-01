@@ -13,7 +13,7 @@
             class="bg-gray-300 border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
             <li v-for="item in dropdownItems" :key="item.name"
                 class="rounded-sm relative px-3 py-1 hover:bg-gray-100 text-black">
-                <NuxtLink :to="`product-category/${item.name}`"
+                <NuxtLink :to="`/product-category/${item.name}`" exact
                     class="w-full text-left flex items-center outline-none focus:outline-none">
                     <span class="pr-1 flex-1"> {{ item.name }} </span>
                     <span class="mr-auto" v-if="item.submenu && item.submenu.length">
@@ -26,7 +26,7 @@
                 <ul v-if="item.submenu && item.submenu.length"
                     class="bg-gray-300 border rounded-sm absolute top-0 right-0 transition duration-150 ease-in-out origin-top-left min-w-32">
                     <NuxtLink v-for="subitem in item.submenu" :key="subitem" class="px-3 py-1 hover:bg-gray-100 block"
-                        :to="`product-category/${item.name}-${subitem}`">
+                        :to="`/product-category/${item.name}-${subitem}`" exact>
                         {{ subitem }}
                     </NuxtLink>
                 </ul>
